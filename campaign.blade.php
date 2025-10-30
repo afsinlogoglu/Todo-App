@@ -102,154 +102,83 @@
             </section>
 
             <!-- Kampanya Detayları Section -->
-            <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-50">
+            <section class="py-16 bg-white">
                 <div class="container mx-auto px-4">
-                    <div class="max-w-6xl mx-auto">
-                        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">Kampanya Detayları</h2>
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-2xl font-bold mb-8 text-gray-800">Kampanya Detayları</h2>
+                        
+                        <div class="prose prose-lg max-w-none text-gray-700">
+                            <p class="mb-6 leading-relaxed">
+                                Kasım ayı içerisinde Destek Yatırım Mobil ve İnternet Şube üzerinden hesap açan müşterilerimiz hisse senedi işlemlerini SIFIR KOMİSYONLA gerçekleştiriyor!
+                            </p>
+
+                            <p class="mb-6 leading-relaxed">
+                                • 03 - 30 Kasım 2025 tarihleri arasında mobil ve internet şube üzerinden hesap açan müşteriler 31 Aralık 2025 tarihine kadar Destek Yatırım Mobil, internet şube, ForInvest, Matriks ve İdeal Data'dan üzerinden gerçekleştirdiği hisse senedi işlemlerinde SIFIR KOMİSYON "0" imkanından yaralanacaklardır.
+                            </p>
+
+                            <p class="mb-8 leading-relaxed">
+                                • Üstelik yıllık bakım ücreti, EFT havale ücreti yok! Destek Yatırım Mobil ve İnternet Şube üzerinden 15 dk gecikmeden canlı veri imkanından ücretsiz faydalanma fırsatını kaçırmayın!
+                            </p>
+
+                            <p class="mb-4 leading-relaxed">
+                                <strong>• Kampanya dönemi:</strong> 03 - 30 Kasım 2025 tarihlerinde hesap açanlar<br>
+                                <strong>• Yararlanma Tarihi:</strong> 03 Kasım - 31 Aralık 2025<br>
+                                <strong>• Faydalanacak Müşteriler:</strong> Hisse senedi hesabı açan müşteriler<br>
+                                <strong>• Komisyon Oranı:</strong> Dijital kanallar üzerinden gerçekleşen hisse senedi işlemlerinde sıfır "0" komisyon
+                            </p>
+
+                            <h3 class="text-xl font-bold mt-8 mb-4 text-gray-800">Detaylar:</h3>
                             
-                            <!-- Ana Kampanya Açıklaması -->
-                            <div class="bg-gradient-to-r from-desteky-700 to-desteky-600 text-white rounded-xl p-6 md:p-8 mb-8">
-                                <p class="text-lg md:text-xl leading-relaxed text-center font-medium">
-                                    Kasım ayı içerisinde Destek Yatırım Mobil ve İnternet Şube üzerinden hesap açan müşterilerimiz 
-                                    hisse senedi işlemlerini <span class="font-bold text-2xl">SIFIR KOMİSYONLA</span> gerçekleştiriyor!
-                                </p>
-                            </div>
+                            <p class="mb-4 leading-relaxed">
+                                • Kasım ayı sonuna kadar Destek Yatırım Mobil ve İnternet Şube üzerinden hesap açan yeni müşteriler, 31 Aralık 2025 tarihine kadar Destek Yatırım mobil, internet şube, ForInvest, Matriks ve İdeal Data üzerinden gerçekleştirecekleri hisse senedi işlemleri için SIFIR KOMİSYON oranından yararlanacaktır.
+                            </p>
 
-                            <!-- Önemli Bilgiler -->
-                            <div class="grid md:grid-cols-1 gap-6 mb-8">
-                                <div class="bg-blue-50 rounded-lg p-6 border-l-4 border-blue-500">
-                                    <ul class="space-y-4 text-gray-700">
-                                        <li class="flex items-start">
-                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                            <span>03 - 30 Kasım 2025 tarihleri arasında mobil ve internet şube üzerinden hesap açan müşteriler 31 Aralık 2025 tarihine kadar Destek Yatırım Mobil, internet şube, ForInvest, Matriks ve İdeal Data'dan üzerinden gerçekleştirdiği hisse senedi işlemlerinde <strong>SIFIR KOMİSYON "0"</strong> imkanından yaralanacaklardır.</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
-                                            <span>Üstelik yıllık bakım ücreti, EFT havale ücreti yok! Destek Yatırım Mobil ve İnternet Şube üzerinden 15 dk gecikmeden canlı veri imkanından ücretsiz faydalanma fırsatını kaçırmayın!</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p class="mb-4 leading-relaxed">
+                                • Müşterilere hesap açtıkları tarihten bir gün sonra hisse senedi işlemleri için SIFIR KOMİSYON oranı tanımlanacaktır.
+                            </p>
 
-                            <!-- Kampanya Özeti -->
-                            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                                <div class="bg-gray-50 rounded-lg p-6">
-                                    <h3 class="font-bold text-lg mb-4 text-desteky-700">
-                                        <i class="fas fa-calendar-alt mr-2"></i>Kampanya Bilgileri
-                                    </h3>
-                                    <ul class="space-y-3 text-gray-700">
-                                        <li><strong>Kampanya dönemi:</strong> 03 - 30 Kasım 2025 tarihlerinde hesap açanlar</li>
-                                        <li><strong>Yararlanma Tarihi:</strong> 03 Kasım - 31 Aralık 2025</li>
-                                        <li><strong>Faydalanacak Müşteriler:</strong> Hisse senedi hesabı açan müşteriler</li>
-                                        <li><strong>Komisyon Oranı:</strong> Dijital kanallar üzerinden gerçekleşen hisse senedi işlemlerinde sıfır "0" komisyon</li>
-                                    </ul>
-                                </div>
+                            <p class="mb-4 leading-relaxed">
+                                • Kampanyadan yararlanılması için yapılacak işlemlerin Destek Yatırım mobil, internet şube, ForInvest, Matriks ya da İdeal Data'dan gerçekleşmesi gerekmektedir.
+                            </p>
 
-                                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 border-2 border-green-200">
-                                    <h3 class="font-bold text-lg mb-4 text-green-700">
-                                        <i class="fas fa-gift mr-2"></i>Avantajlar
-                                    </h3>
-                                    <ul class="space-y-3 text-gray-700">
-                                        <li class="flex items-center">
-                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                                            <span>Sıfır komisyon</span>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                                            <span>Yıllık bakım ücreti yok</span>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                                            <span>EFT/Havale ücreti yok</span>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <i class="fas fa-star text-yellow-500 mr-2"></i>
-                                            <span>Ücretsiz canlı veri</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p class="mb-4 leading-relaxed">
+                                • Müşteriler, kampanya bitimini takip eden ilk iş gününde (2 Ocak 2026) işlemlerini Destek Yatırım'ın mevcut komisyon oranlarıyla gerçekleştireceklerdir.
+                            </p>
 
-                            <!-- Detaylar -->
-                            <div class="bg-gray-50 rounded-lg p-6 md:p-8 mb-8">
-                                <h3 class="font-bold text-xl mb-6 text-gray-800">
-                                    <i class="fas fa-info-circle mr-2"></i>Detaylar
-                                </h3>
-                                <ul class="space-y-4 text-gray-700">
-                                    <li class="flex items-start">
-                                        <span class="inline-block w-2 h-2 bg-desteky-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                        <span>Kasım ayı sonuna kadar Destek Yatırım Mobil ve İnternet Şube üzerinden hesap açan yeni müşteriler, 31 Aralık 2025 tarihine kadar Destek Yatırım mobil, internet şube, ForInvest, Matriks ve İdeal Data üzerinden gerçekleştirecekleri hisse senedi işlemleri için SIFIR KOMİSYON oranından yararlanacaktır.</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="inline-block w-2 h-2 bg-desteky-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                        <span>Müşterilere hesap açtıkları tarihten bir gün sonra hisse senedi işlemleri için SIFIR KOMİSYON oranı tanımlanacaktır.</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="inline-block w-2 h-2 bg-desteky-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                        <span>Kampanyadan yararlanılması için yapılacak işlemlerin Destek Yatırım mobil, internet şube, ForInvest, Matriks ya da İdeal Data'dan gerçekleşmesi gerekmektedir.</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="inline-block w-2 h-2 bg-desteky-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                        <span>Müşteriler, kampanya bitimini takip eden ilk iş gününde (2 Ocak 2026) işlemlerini Destek Yatırım'ın mevcut komisyon oranlarıyla gerçekleştireceklerdir.</span>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="inline-block w-2 h-2 bg-desteky-700 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                                        <span>Kasım ve Aralık ayında yapılan işlem hacimlerine göre kişiye özel komisyon tanımlaması yapılacak olup, bu tutar max dijital kanallardan onbinde 8, yatırım danışmanı/temsilci aracılığıyla gerçekleşen işlemlerde ise binde 1 komisyon uygulanacaktır.</span>
-                                    </li>
-                                </ul>
-                            </div>
+                            <p class="mb-8 leading-relaxed">
+                                • Kasım ve Aralık ayında yapılan işlem hacimlerine göre kişiye özel komisyon tanımlaması yapılacak olup, bu tutar max dijital kanallardan onbinde 8, yatırım danışmanı/temsilci aracılığıyla gerçekleşen işlemlerde ise binde 1 komisyon uygulanacaktır.
+                            </p>
 
-                            <!-- Hisse Senedi İşlemleri -->
-                            <div class="border-t-2 border-gray-200 pt-8">
-                                <h3 class="font-bold text-xl mb-6 text-gray-800">
-                                    <i class="fas fa-chart-line mr-2"></i>Hisse Senedi İşlemleri
-                                </h3>
-                                <div class="space-y-4 text-gray-700">
-                                    <p class="flex items-start">
-                                        <i class="fas fa-mobile-alt text-desteky-700 mt-1 mr-3"></i>
-                                        <span>Hisse senedi alım–satım işlemlerinizi, Destek Yatırım Mobil ve İnternet Şube üzerinden kolaylıkla gerçekleştirebilirsiniz.</span>
-                                    </p>
-                                    <p class="flex items-start">
-                                        <i class="fas fa-user-plus text-desteky-700 mt-1 mr-3"></i>
-                                        <span>Henüz hisse senedi hesabınız yoksa, Destek Yatırım Mobil uygulamasını indirerek Online Müşteri Olun adımıyla 3 Adımda Hızla yatırım hesabınızı açabilir ve sözleşmelerinizi onaylayarak işlemlere hemen başlayabilirsiniz.</span>
-                                    </p>
-                                    <p class="flex items-start">
-                                        <i class="fas fa-list text-desteky-700 mt-1 mr-3"></i>
-                                        <span>Destek Yatırım Mobil ve İnternet Şube üzerinden seçtiğiniz hisse senetleri ve VİOP sözleşmeleri için takip listenizi oluşturabilir, canlı fiyat hareketlerini kolaylıkla izleyebilirsiniz. Günlük emirlerinizi ve portföyünüzü takip edebilir, fiyat takibi yaparak kendi favori listelerinizi oluşturabilirsiniz.</span>
-                                    </p>
-                                </div>
-                            </div>
+                            <p class="mb-4 leading-relaxed">
+                                Borsa İstanbul Pay (Hisse Senedi) Piyasası piyasa işleyişi kurallarına erişmek için Borsa İstanbul'un internet sitesini ziyaret edebilirsiniz.
+                            </p>
 
-                            <!-- Önemli Linkler -->
-                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mt-8 rounded-lg">
-                                <p class="text-gray-700 mb-4">
-                                    <i class="fas fa-info-circle text-yellow-600 mr-2"></i>
-                                    <strong>Destek Yatırım Menkul Değerler A.Ş.,</strong> hisse senedi ve VİOP işlemleriniz için aracılık hizmeti sunmaktadır.
-                                </p>
-                                <div class="space-y-3">
-                                    <p class="text-gray-700">
-                                        <i class="fas fa-external-link-alt text-blue-600 mr-2"></i>
-                                        Borsa İstanbul Pay (Hisse Senedi) Piyasası piyasa işleyişi kurallarına erişmek için 
-                                        <a href="https://borsaistanbul.com" target="_blank" class="text-blue-600 hover:underline font-semibold">
-                                            Borsa İstanbul'un internet sitesini
-                                        </a> ziyaret edebilirsiniz.
-                                    </p>
-                                    <p class="text-gray-700">
-                                        <i class="fas fa-file-pdf text-red-600 mr-2"></i>
-                                        Destek Yatırım'ın tüm ürünler bazındaki masraf ve komisyonları için 
-                                        <a href="https://www.destekyatirim.com/storage/01JDH57GJ7TMPMKXF16XQACYNH.pdf" target="_blank" class="text-blue-600 hover:underline font-semibold">
-                                            tıklayınız
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
+                            <h3 class="text-xl font-bold mt-8 mb-4 text-gray-800">Hisse Senedi İşlemleri</h3>
+                            
+                            <p class="mb-4 leading-relaxed">
+                                • Hisse senedi alım–satım işlemlerinizi, Destek Yatırım Mobil ve İnternet Şube üzerinden kolaylıkla gerçekleştirebilirsiniz.
+                            </p>
 
-                            <!-- CTA Button -->
-                            <div class="text-center mt-8">
+                            <p class="mb-4 leading-relaxed">
+                                • Henüz hisse senedi hesabınız yoksa, Destek Yatırım Mobil uygulamasını indirerek Online Müşteri Olun adımıyla 3 Adımda Hızla yatırım hesabınızı açabilir ve sözleşmelerinizi onaylayarak işlemlere hemen başlayabilirsiniz.
+                            </p>
+
+                            <p class="mb-8 leading-relaxed">
+                                • Destek Yatırım Mobil ve İnternet Şube üzerinden seçtiğiniz hisse senetleri ve VİOP sözleşmeleri için takip listenizi oluşturabilir, canlı fiyat hareketlerini kolaylıkla izleyebilirsiniz. Günlük emirlerinizi ve portföyünüzü takip edebilir, fiyat takibi yaparak kendi favori listelerinizi oluşturabilirsiniz.
+                            </p>
+
+                            <p class="mb-4 leading-relaxed">
+                                Destek Yatırım Menkul Değerler A.Ş., hisse senedi ve VİOP işlemleriniz için aracılık hizmeti sunmaktadır.
+                            </p>
+
+                            <p class="mb-6 leading-relaxed">
+                                Destek Yatırım'ın tüm ürünler bazındaki masraf ve komisyonları için <a href="https://www.destekyatirim.com/storage/01JDH57GJ7TMPMKXF16XQACYNH.pdf" target="_blank" class="text-blue-600 hover:underline">tıklayınız</a>
+                            </p>
+
+                            <div class="text-center mt-10">
                                 <a href="https://hesapac.destekyatirim.com/" target="_blank"
-                                    class="inline-block bg-desteky-700 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-desteky-600 transition shadow-lg transform hover:scale-105">
-                                    <i class="fas fa-rocket mr-2"></i>Hemen Başvur
+                                    class="inline-block bg-desteky-700 text-white px-8 py-3 rounded font-semibold hover:bg-desteky-600 transition">
+                                    Hemen Başvur
                                 </a>
                             </div>
                         </div>
