@@ -1,45 +1,918 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <title>Mesaj Ge?mi?i</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+        background: #f8f9fa !important;
+        margin: 0;
+      }
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./style.css" />
-    <title>Todo List</title>
+      .main-content {
+        background: #f8f9fa;
+        min-height: calc(100vh - 64px);
+      }
+
+      .messages-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+
+      .messages-header {
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        color: white;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2);
+      }
+
+      .filters-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+      }
+
+      .table-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+      }
+
+      .messages-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      .messages-table thead {
+        background: #f8f9fa;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .messages-table th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #495057;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .messages-table tbody tr {
+        transition: all 0.2s ease;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .messages-table tbody tr:hover {
+        background: #f8f9fa;
+      }
+
+      .messages-table td {
+        padding: 1rem;
+        color: #212529;
+        font-size: 0.875rem;
+      }
+
+      .user-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.25rem 0.75rem;
+        background: #e3f2fd;
+        border-radius: 20px;
+        font-weight: 500;
+        color: #1976d2;
+      }
+
+      .user-badge.admin {
+        background: #fff3e0;
+        color: #f57c00;
+      }
+
+      .status-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status-badge.sent {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .status-badge.failed {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .message-preview {
+        max-width: 300px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .metadata-btn {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .metadata-btn:hover {
+        background: #5a6268;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .pagination-btn {
+        padding: 0.5rem 1rem;
+        background: white;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        color: #495057;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-size: 0.875rem;
+        font-family: inherit;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+      }
+
+      .pagination-btn:hover:not(:disabled) {
+        background: #25d366;
+        color: white;
+        border-color: #25d366;
+        transform: translateY(-1px);
+      }
+
+      .pagination-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .pagination-btn:active:not(:disabled) {
+        transform: translateY(0);
+      }
+
+      .pagination-info {
+        padding: 0.5rem 1rem;
+        color: #6c757d;
+        font-size: 0.875rem;
+      }
+
+      .filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .filter-input {
+        flex: 1;
+        min-width: 200px;
+        padding: 0.5rem;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        font-size: 0.875rem;
+      }
+
+      .filter-btn {
+        padding: 0.5rem 1.5rem;
+        background: #25d366;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-family: inherit;
+        font-size: 0.875rem;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .filter-btn:hover {
+        background: #128c7e;
+        transform: translateY(-1px);
+      }
+
+      .filter-btn:active {
+        transform: translateY(0);
+      }
+
+      .filter-btn.export-btn {
+        background: #0d6efd;
+      }
+
+      .filter-btn.export-btn:hover {
+        background: #0b5ed7;
+      }
+
+      .filter-btn:disabled,
+      .filter-btn:disabled:hover {
+        background: #adb5bd;
+        cursor: not-allowed;
+        transform: none;
+        color: white;
+        opacity: 0.8;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .stat-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        text-align: center;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #25d366;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        color: #6c757d;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: #6c757d;
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #dee2e6;
+      }
+
+      #metadataModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #metadataModal .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        max-width: 500px;
+        width: 90%;
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+
+      #metadataModal .close-btn {
+        background: #6c757d;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        .messages-container {
+          padding: 1rem 0.5rem;
+        }
+
+        .messages-header {
+          padding: 1.5rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .messages-header h1 {
+          font-size: 1.5rem !important;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.75rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .filters-card,
+        .table-card {
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+        }
+
+        .messages-table {
+          font-size: 0.75rem;
+        }
+
+        .messages-table th,
+        .messages-table td {
+          padding: 0.5rem 0.25rem;
+        }
+
+        .message-preview {
+          max-width: 120px;
+          font-size: 0.7rem;
+        }
+
+        .filter-group {
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .filter-input {
+          width: 100%;
+          min-width: unset;
+        }
+
+        .filter-btn,
+        .filter-btn.export-btn {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .user-badge {
+          font-size: 0.7rem;
+          padding: 0.2rem 0.5rem;
+        }
+
+        .status-badge {
+          font-size: 0.65rem;
+          padding: 0.2rem 0.5rem;
+        }
+
+        .metadata-btn {
+          font-size: 0.65rem;
+          padding: 0.2rem 0.4rem;
+        }
+
+        .pagination {
+          padding: 1rem;
+          flex-wrap: wrap;
+          gap: 0.25rem;
+        }
+
+        .pagination-btn {
+          padding: 0.4rem 0.6rem;
+          font-size: 0.75rem;
+        }
+
+        .pagination-info {
+          font-size: 0.75rem;
+          width: 100%;
+          text-align: center;
+          margin-top: 0.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <header>
-      <h1>Afsin's Todo List</h1>
-    </header>
-    <form action="">
-      <input type="text " class="todo-input" />
-      <button class="todo-button" type="submit">
-        <i class="fas fa-plus square"></i>
-      </button>
-      <div class="select">
-        <select name="todos" class="filter-todo">
-        <option value="all">All</option>
-        <option value="completed">Completed</option>
-        <option value="uncompleted">Uncompleted</option>
-      </select>
+    <div class="main-content">
+      <div class="messages-container">
+        <div class="messages-header">
+          <h1 style="margin: 0; margin-bottom: 0.5rem; font-size: 2rem;">
+            <i class="fi fi-sr-messages" style="margin-right: 0.5rem;"></i>
+            Mesaj Ge?mi?i
+          </h1>
+          <p style="margin: 0; opacity: 0.9;">
+            G?nderilen t?m mesajlar?n detayl? listesi
+          </p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card">
+            <div class="stat-value" id="totalMessages">0</div>
+            <div class="stat-label">Toplam Mesaj</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="sentMessages">0</div>
+            <div class="stat-label">Ba?ar?l?</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="failedMessages">0</div>
+            <div class="stat-label">Ba?ar?s?z</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="todayMessages">0</div>
+            <div class="stat-label">Bug?n</div>
+          </div>
+        </div>
+
+        <div class="filters-card">
+          <h3 style="margin-top: 0; margin-bottom: 1rem; color: #212529;">
+            <i class="fi fi-sr-filter" style="margin-right: 0.5rem;"></i>
+            Filtreler
+          </h3>
+          <div class="filter-group">
+            <input
+              type="text"
+              id="phoneFilter"
+              class="filter-input"
+              placeholder="Topluluk ara..."
+            />
+            <input type="date" id="startDateFilter" class="filter-input" />
+            <input type="date" id="endDateFilter" class="filter-input" />
+            <select id="statusFilter" class="filter-input">
+              <option value="">T?m Durumlar</option>
+              <option value="sent">G?nderildi</option>
+              <option value="failed">Ba?ar?s?z</option>
+            </select>
+            <button onclick="applyFilters()" class="filter-btn">
+              <i class="fi fi-sr-search" style="margin-right: 0.5rem;"></i>
+              Filtrele
+            </button>
+            <button
+              onclick="resetFilters()"
+              class="filter-btn"
+              style="background: #6c757d;"
+            >
+              <i class="fi fi-sr-refresh" style="margin-right: 0.5rem;"></i>
+              Temizle
+            </button>
+            <button
+              id="exportExcelBtn"
+              onclick="exportToExcel()"
+              class="filter-btn export-btn"
+              disabled
+            >
+              <i class="fi fi-sr-file-export" style="margin-right: 0.5rem;"></i>
+              Excel'e Aktar
+            </button>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div style="overflow-x: auto;">
+            <table class="messages-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>G?nderen</th>
+                  <th>Topluluk</th>
+                  <th>Mesaj</th>
+                  <th>Durum</th>
+                  <th>Tarih</th>
+                  <th>??lemler</th>
+                </tr>
+              </thead>
+              <tbody id="messagesTableBody">
+                <tr>
+                  <td colspan="7" class="empty-state">
+                    <i class="fi fi-sr-spinner-alt"></i>
+                    <p>Mesajlar y?kleniyor...</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination" id="pagination"></div>
+        </div>
       </div>
-    </form>
-    <div class="todo-container">
-      <ul class="todo-list"></ul>
     </div>
-    
-    <script src="./app.js"></script>
+
+    <div id="metadataModal">
+      <div class="modal-content">
+        <h3 style="margin-top: 0;">Mesaj Detaylar?</h3>
+        <pre
+          id="metadataContent"
+          style="
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.875rem;
+          "
+        ></pre>
+        <button onclick="closeMetadata()" class="close-btn">Kapat</button>
+      </div>
+    </div>
+
+    <script>
+      let currentPage = 1;
+      let totalPages = 1;
+      let currentMessages = [];
+      let exportButton;
+
+      const resolvedBasePath = (() => {
+        if (typeof window !== "undefined" && typeof window.__APP_BASE_PATH__ === "string") {
+          return window.__APP_BASE_PATH__;
+        }
+        if (typeof basePath !== "undefined") {
+          return basePath;
+        }
+        return "";
+      })();
+
+      function resolveApiPath(path) {
+        const normalizedBase = resolvedBasePath ? resolvedBasePath.replace(/\/$/, "") : "";
+        const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+        return `${normalizedBase}${normalizedPath}` || normalizedPath;
+      }
+
+      async function loadMessages(page = 1) {
+        try {
+          const params = new URLSearchParams({
+            page: page,
+            limit: 50,
+            phoneNumber: document.getElementById("phoneFilter").value,
+            startDate: document.getElementById("startDateFilter").value,
+            endDate: document.getElementById("endDateFilter").value,
+            status: document.getElementById("statusFilter").value,
+          });
+
+          const apiUrl = resolveApiPath("/api/messages");
+          const response = await fetch(`${apiUrl}?${params.toString()}`, {
+            credentials: "include",
+          });
+
+          if (!response.ok) {
+            throw new Error("Mesajlar y?klenemedi");
+          }
+
+          const data = await response.json();
+
+          if (data.success) {
+            displayMessages(data.data.messages);
+            updatePagination(data.data.pagination);
+            await loadStats();
+          }
+        } catch (error) {
+          console.error("Error loading messages:", error);
+          currentMessages = [];
+          if (exportButton) {
+            exportButton.disabled = true;
+          }
+          document.getElementById("messagesTableBody").innerHTML = `
+            <tr>
+              <td colspan="7" class="empty-state">
+                <i class="fi fi-sr-exclamation-triangle"></i>
+                <p>Mesajlar y?klenirken hata olu?tu</p>
+              </td>
+            </tr>
+          `;
+        }
+      }
+
+      function displayMessages(messages) {
+        const tbody = document.getElementById("messagesTableBody");
+        currentMessages = Array.isArray(messages) ? messages : [];
+
+        if (exportButton) {
+          exportButton.disabled = currentMessages.length === 0;
+        }
+
+        if (!currentMessages.length) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" class="empty-state">
+                <i class="fi fi-sr-inbox"></i>
+                <p>Hen?z mesaj bulunmuyor</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = currentMessages
+          .map(
+            (msg) => `
+            <tr>
+              <td>#${msg.id}</td>
+              <td>
+                ${
+                  msg.user
+                    ? `
+                      <span class="user-badge ${msg.user.role === "ADMIN" ? "admin" : ""}">
+                        <i class="fi fi-sr-user"></i>
+                        ${msg.user.name}
+                      </span>
+                    `
+                    : `
+                      <span style="color: #6c757d;">Sistem</span>
+                    `
+                }
+              </td>
+              <td style="font-weight: 500; color: #495057;">
+                ${msg.communityName || msg.recipient || "-"}
+              </td>
+              <td>
+                <div class="message-preview" title="${escapeHtml(msg.message)}">
+                  ${escapeHtml(msg.message)}
+                </div>
+              </td>
+              <td>
+                <span class="status-badge ${msg.status}">
+                  ${msg.status === "sent" ? "G?nderildi" : "Ba?ar?s?z"}
+                </span>
+              </td>
+              <td style="font-size: 0.8rem; color: #6c757d;">
+                ${formatDate(msg.sentAt)}
+              </td>
+              <td>
+                ${
+                  msg.metadata
+                    ? `
+                      <button class="metadata-btn" onclick="showMetadata('${escapeHtml(
+                        JSON.stringify(msg)
+                      )}')">
+                        <i class="fi fi-sr-info"></i>
+                        Detay
+                      </button>
+                    `
+                    : "-"
+                }
+              </td>
+            </tr>
+          `
+          )
+          .join("");
+      }
+
+      function updatePagination(pagination) {
+        currentPage = pagination.page;
+        totalPages = pagination.totalPages;
+
+        const paginationEl = document.getElementById("pagination");
+
+        paginationEl.innerHTML = `
+          <button
+            class="pagination-btn"
+            onclick="loadMessages(1)"
+            ${currentPage === 1 ? "disabled" : ""}
+          >
+            <i class="fi fi-sr-angle-double-left"></i>
+          </button>
+          <button
+            class="pagination-btn"
+            onclick="loadMessages(${Math.max(1, currentPage - 1)})"
+            ${!pagination.hasPrev ? "disabled" : ""}
+          >
+            <i class="fi fi-sr-angle-left"></i>
+          </button>
+          <span class="pagination-info">
+            Sayfa ${currentPage} / ${totalPages} (Toplam: ${pagination.totalCount})
+          </span>
+          <button
+            class="pagination-btn"
+            onclick="loadMessages(${Math.min(totalPages, currentPage + 1)})"
+            ${!pagination.hasNext ? "disabled" : ""}
+          >
+            <i class="fi fi-sr-angle-right"></i>
+          </button>
+          <button
+            class="pagination-btn"
+            onclick="loadMessages(${totalPages})"
+            ${currentPage === totalPages ? "disabled" : ""}
+          >
+            <i class="fi fi-sr-angle-double-right"></i>
+          </button>
+        `;
+      }
+
+      async function loadStats() {
+        try {
+          const statsUrl = resolveApiPath("/api/messages/stats");
+          const response = await fetch(statsUrl, {
+            credentials: "include",
+          });
+
+          if (!response.ok) {
+            throw new Error("?statistikler y?klenemedi");
+          }
+
+          const data = await response.json();
+
+          if (data.success && data.data) {
+            const stats = data.data;
+            document.getElementById("totalMessages").textContent = stats.total || 0;
+
+            const sentCount = stats.byStatus?.find((s) => s.status === "sent")?._count?.id || 0;
+            const failedCount = stats.byStatus?.find((s) => s.status === "failed")?._count?.id || 0;
+
+            document.getElementById("sentMessages").textContent = sentCount;
+            document.getElementById("failedMessages").textContent = failedCount;
+          }
+        } catch (error) {
+          console.error("Error loading stats:", error);
+        }
+
+        try {
+          const today = new Date().toISOString().split("T")[0];
+          const summaryUrl = resolveApiPath("/api/messages/daily-summary");
+          const response = await fetch(`${summaryUrl}?date=${today}`, {
+            credentials: "include",
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.success && data.data) {
+              const todayCount = data.data.summary?.reduce((acc, item) => acc + item._count.id, 0) || 0;
+              document.getElementById("todayMessages").textContent = todayCount;
+            }
+          }
+        } catch (error) {
+          console.error("Error loading today stats:", error);
+        }
+      }
+
+      function applyFilters() {
+        loadMessages(1);
+      }
+
+      function resetFilters() {
+        document.getElementById("phoneFilter").value = "";
+        document.getElementById("startDateFilter").value = "";
+        document.getElementById("endDateFilter").value = "";
+        document.getElementById("statusFilter").value = "";
+        loadMessages(1);
+      }
+
+      function showMetadata(msgData) {
+        try {
+          const msg = JSON.parse(msgData);
+          const modal = document.getElementById("metadataModal");
+          const content = document.getElementById("metadataContent");
+
+          const details = {
+            "Mesaj ID": msg.id,
+            G?nderen: msg.user?.name || "Sistem",
+            "G?nderen Email": msg.user?.email || "-",
+            Topluluk: msg.communityName || msg.recipient || "-",
+            "Chat ID": msg.phoneNumber,
+            Mesaj: msg.message,
+            Durum: msg.status,
+            "G?nderim Zaman?": formatDate(msg.sentAt),
+            Olu?turulma: formatDate(msg.createdAt),
+            G?ncellenme: formatDate(msg.updatedAt),
+            Metadata: msg.metadata ? JSON.stringify(msg.metadata, null, 2) : "-",
+          };
+
+          content.textContent = JSON.stringify(details, null, 2);
+          modal.style.display = "flex";
+        } catch (error) {
+          console.error("Error showing metadata:", error);
+        }
+      }
+
+      function closeMetadata() {
+        document.getElementById("metadataModal").style.display = "none";
+      }
+
+      function formatDate(dateString) {
+        if (!dateString) {
+          return "-";
+        }
+        const date = new Date(dateString);
+        if (Number.isNaN(date.getTime())) {
+          return "-";
+        }
+        return date.toLocaleString("tr-TR", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      function escapeHtml(text) {
+        if (typeof text !== "string") {
+          return "";
+        }
+        const map = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+          "`": "&#096;",
+        };
+        return text.replace(/[&<>"'`]/g, (m) => map[m]);
+      }
+
+      function normalizeText(value) {
+        if (value === null || value === undefined) {
+          return "-";
+        }
+        return String(value).replace(/\s+/g, " ").trim();
+      }
+
+      function exportToExcel() {
+        if (!currentMessages.length) {
+          window.alert("D??a aktar?lacak mesaj bulunamad?.");
+          return;
+        }
+
+        if (typeof XLSX === "undefined") {
+          console.error("XLSX k?t?phanesi y?klenemedi.");
+          window.alert("Excel d??a aktar?m? i?in gerekli k?t?phane y?klenemedi.");
+          return;
+        }
+
+        const rows = currentMessages.map((msg) => ({
+          ID: msg.id ?? "-",
+          G?nderen: msg.user?.name || "Sistem",
+          "G?nderen Email": msg.user?.email || "-",
+          Topluluk: msg.communityName || msg.recipient || "-",
+          "Chat ID": msg.phoneNumber || "-",
+          Mesaj: normalizeText(msg.message) || "-",
+          Durum: msg.status === "sent" ? "G?nderildi" : "Ba?ar?s?z",
+          "G?nderim Zaman?": formatDate(msg.sentAt),
+          Olu?turulma: formatDate(msg.createdAt),
+          G?ncellenme: formatDate(msg.updatedAt),
+          Metadata: msg.metadata ? JSON.stringify(msg.metadata) : "-",
+        }));
+
+        const worksheet = XLSX.utils.json_to_sheet(rows);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Mesajlar");
+
+        const timestamp = new Date().toISOString().replace(/[:T]/g, "-").split(".")[0];
+        XLSX.writeFile(workbook, `mesajlar-${timestamp}.xlsx`);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        exportButton = document.getElementById("exportExcelBtn");
+        if (exportButton) {
+          exportButton.disabled = true;
+        }
+
+        loadMessages();
+
+        const today = new Date().toISOString().split("T")[0];
+        const endDateInput = document.getElementById("endDateFilter");
+        if (endDateInput) {
+          endDateInput.value = today;
+        }
+
+        const phoneFilterInput = document.getElementById("phoneFilter");
+        if (phoneFilterInput) {
+          phoneFilterInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+              applyFilters();
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>
